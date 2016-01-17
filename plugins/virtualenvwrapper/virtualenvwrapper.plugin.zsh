@@ -13,6 +13,13 @@ elif [[ -f "/etc/bash_completion.d/virtualenvwrapper" ]]; then
     virtualenvwrapper="/etc/bash_completion.d/virtualenvwrapper"
     source "/etc/bash_completion.d/virtualenvwrapper"
   }
+elif [[ -f "$HOME/.local/bin/virtualenvwrapper.sh" ]]; then
+  function {
+    setopt local_options
+    unsetopt equals
+    virtualenvwrapper="$HOME/.local/bin/virtualenvwrapper.sh"
+    source "$HOME/.local/bin/virtualenvwrapper.sh"
+  }
 else
   print "[oh-my-zsh] virtualenvwrapper plugin: Cannot find ${virtualenvwrapper}.\n"\
         "Please install with \`pip install virtualenvwrapper\`" >&2
