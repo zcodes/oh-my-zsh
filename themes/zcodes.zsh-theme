@@ -5,6 +5,8 @@
 #
 # http://ysmood.org/wp/2013/03/my-ys-terminal-theme/
 # Mar 2013 ys
+#
+# Forked from ys.zsh-theme on 2016-01-17
 
 # Machine name.
 function box_name {
@@ -71,7 +73,7 @@ ${hg_info}\
 ${git_info} \
 ${virtualenv_info}\
 %{$fg[white]%}[%*]
-%{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
+%{$terminfo[bold]$fg[red]%}→ %{$reset_color%}"
 
 if [[ "$USER" == "root" ]]; then
 PROMPT="
@@ -85,5 +87,5 @@ ${hg_info}\
 ${git_info} \
 ${virtualenv_info}\
 %{$fg[white]%}[%*]
-%{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
+%{$terminfo[bold]$fg[red]%}→ %{$reset_color%}"
 fi
