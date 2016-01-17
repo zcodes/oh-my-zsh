@@ -2,7 +2,7 @@
 # Tested on Linux, Unix and Windows under ANSI colors.
 # It is recommended to use with a dark background and the font Inconsolata.
 # Colors: black, red, green, yellow, *blue, magenta, cyan, and white.
-# 
+#
 # http://ysmood.org/wp/2013/03/my-ys-terminal-theme/
 # Mar 2013 ys
 
@@ -44,7 +44,22 @@ ys_hg_prompt_info() {
 	fi
 }
 
-# Prompt format: \n # USER at MACHINE in DIRECTORY on git:BRANCH STATE [TIME] \n $ 
+# virtualenv info
+YS_VIRTUALENV_PREFIX1=" %{$terminfo[bold]$fg[white]%}#"
+YS_VIRTUALENV_PREFIX2="%{$fg[white]%}"
+YS_VIRTUALENV_SUFFIX="%{$fg[white]%}#%{$reset_color%} "
+
+local virtualenv_info='$(ys_virtualenv_info)'
+ys_virtualenv_info() {
+    if [ -d "$VIRTUAL_ENV" ]; then
+        echo -n "${YS_VIRTUALENV_PREFIX1}"
+        echo -n "${YS_VIRTUALENV_PREFIX2}"
+        echo -n `basename "$VIRTUAL_ENV"`
+        echo -n "${YS_VIRTUALENV_SUFFIX}"
+    fi
+}
+
+# Prompt format: \n # USER at MACHINE in DIRECTORY on git:BRANCH STATE [TIME] \n $
 PROMPT="
 %{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
 %{$fg[cyan]%}%n \
@@ -54,6 +69,7 @@ PROMPT="
 %{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
 ${hg_info}\
 ${git_info} \
+${virtualenv_info}\
 %{$fg[white]%}[%*]
 %{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
 
@@ -67,6 +83,7 @@ PROMPT="
 %{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
 ${hg_info}\
 ${git_info} \
+${virtualenv_info}\
 %{$fg[white]%}[%*]
 %{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
 fi
