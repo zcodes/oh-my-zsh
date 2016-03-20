@@ -1,6 +1,6 @@
 # Clean, simple, compatible and meaningful.
 # Tested on Linux, Unix and Windows under ANSI colors.
-# It is recommended to use with a dark background and the font Inconsolata.
+# It is recommended to use with a dark background.
 # Colors: black, red, green, yellow, *blue, magenta, cyan, and white.
 #
 # http://ysmood.org/wp/2013/03/my-ys-terminal-theme/
@@ -21,7 +21,7 @@ YS_VCS_PROMPT_SUFFIX="%{$reset_color%}"
 YS_VCS_PROMPT_DIRTY=" %{$fg[red]%}x"
 YS_VCS_PROMPT_CLEAN=" %{$fg[green]%}o"
 
-# Git info.
+# Git info
 local git_info='$(git_prompt_info)'
 ZSH_THEME_GIT_PROMPT_PREFIX="${YS_VCS_PROMPT_PREFIX1}git${YS_VCS_PROMPT_PREFIX2}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$YS_VCS_PROMPT_SUFFIX"
@@ -73,17 +73,24 @@ ${virtualenv_info}\
 %{$fg[white]%}[%*]
 %{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
 
-if [[ "$USER" == "root" ]]; then
+# Prompt format:
+#
+# PRIVILEGES USER @ MACHINE in DIRECTORY on git:BRANCH STATE [TIME] tty:$TTY L:$SHELL_LEVEL N:LINE_NUM C:LAST_EXIT_CODE
+# $ COMMAND
+#
+# For example:
+#
+# % ys @ ys-mbp in ~/.oh-my-zsh on git:master x [21:47:42] tty:s000 L:1 N:12 C:0
+# $
 PROMPT="
 %{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
-%{$bg[yellow]%}%{$fg[cyan]%}%n%{$reset_color%} \
-%{$fg[white]%}at \
-%{$fg[green]%}$(box_name) \
+%(#,%{$bg[yellow]%}%{$fg[black]%}%n%{$reset_color%},%{$fg[cyan]%}%n) \
+%{$fg[white]%}@ \
+%{$fg[green]%}%m \
 %{$fg[white]%}in \
-%{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
+%{$terminfo[bold]$fg[yellow]%}%~%{$reset_color%}\
 ${hg_info}\
 ${git_info} \
 ${virtualenv_info}\
 %{$fg[white]%}[%*]
 %{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
-fi
