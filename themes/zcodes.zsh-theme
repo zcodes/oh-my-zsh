@@ -1,20 +1,10 @@
 # Clean, simple, compatible and meaningful.
 # Tested on Linux, Unix and Windows under ANSI colors.
-# It is recommended to use with a dark background and the font Inconsolata.
+# It is recommended to use with a dark background.
 # Colors: black, red, green, yellow, *blue, magenta, cyan, and white.
-#
-# http://ysmood.org/wp/2013/03/my-ys-terminal-theme/
-# Mar 2013 ys
 #
 # Forked from ys.zsh-theme on 2016-01-17
 
-# Machine name.
-function box_name {
-    [ -f ~/.box-name ] && cat ~/.box-name || echo $HOST
-}
-
-# Directory info.
-local current_dir='${PWD/#$HOME/~}'
 
 # VCS
 YS_VCS_PROMPT_PREFIX1=" %{$fg[white]%}on%{$reset_color%} "
@@ -46,6 +36,9 @@ ys_hg_prompt_info() {
 	fi
 }
 
+# C:$exit_code
+#local exit_code="%(?,%?,%{$fg[red]%}%?%{$reset_color})"
+
 # virtualenv info
 YS_VIRTUALENV_PREFIX1=" %{$terminfo[bold]$fg[white]%}#"
 YS_VIRTUALENV_PREFIX2="%{$fg[white]%}"
@@ -61,31 +54,15 @@ ys_virtualenv_info() {
     fi
 }
 
-# Prompt format: \n # USER at MACHINE in DIRECTORY on git:BRANCH STATE [TIME] \n $
 PROMPT="
 %{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
-%{$fg[cyan]%}%n \
-%{$fg[white]%}at \
-%{$fg[green]%}$(box_name) \
+%(#, %{$bg[yellow]%}%{$fg[cyan]%}%n%{$reset_color%},%{$fg[cyan]%}%n) \
+%{$fg[white]%}@ \
+%{$fg[green]%}%m \
 %{$fg[white]%}in \
-%{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
+%{$terminfo[bold]$fg[yellow]%}%~%{$reset_color%}\
 ${hg_info}\
 ${git_info} \
 ${virtualenv_info}\
 %{$fg[white]%}[%*]
 %{$terminfo[bold]$fg[white]%}→ %{$reset_color%}"
-
-if [[ "$USER" == "root" ]]; then
-PROMPT="
-%{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
-%{$bg[yellow]%}%{$fg[cyan]%}%n%{$reset_color%} \
-%{$fg[white]%}at \
-%{$fg[green]%}$(box_name) \
-%{$fg[white]%}in \
-%{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
-${hg_info}\
-${git_info} \
-${virtualenv_info}\
-%{$fg[white]%}[%*]
-%{$terminfo[bold]$fg[white]%}→ %{$reset_color%}"
-fi
