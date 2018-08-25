@@ -65,4 +65,4 @@ ${hg_info}\
 ${git_info} \
 ${virtualenv_info}\
 %{$fg[white]%}[%*]
-%{$terminfo[bold]$fg[white]%}→ %{$reset_color%}"
+%{$terminfo[bold]$fg[white]%}=> %{$reset_color%}"
